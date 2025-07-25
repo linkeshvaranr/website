@@ -1,8 +1,11 @@
 import '@/styles/globals.css'
 
 export const metadata = {
-  title: 'My Blog',
-  description: 'Minimal blog by Linkeshvaran',
+  title: 'Lee',
+  description: 'Just for my blogs and thoughts / linkeshvaranr',
+  icons: {
+    icon: '/favicon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
