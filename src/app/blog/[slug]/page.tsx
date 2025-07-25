@@ -1,12 +1,6 @@
 import { getSlugs, getPostHtml } from '@/lib/md'
 import { notFound } from 'next/navigation'
-import { Metadata } from 'next'
-
-interface PageProps {
-  params: {
-    slug: string
-  }
-}
+import { type Metadata } from 'next'
 
 export async function generateStaticParams() {
   return getSlugs().map(slug => ({
@@ -14,16 +8,17 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { data } = await getPostHtml(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const { data } = await getPostHtml(slug)
   return {
     title: data.title,
     description: data.excerpt || '',
   }
 }
 
-export default async function PostPage({ params }: PageProps) {
-  const { slug } = params
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const post = await getPostHtml(slug)
 
   if (!post) return notFound()
