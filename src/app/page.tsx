@@ -21,14 +21,14 @@ export default function Home() {
     <header className="mb-16">
       <h1 className="text-4xl md:text-6xl font-bold leading-tight">Linkeshvaran R</h1>
       <p className="text-lg md:text-xl text-gray-600 mt-4 max-w-xl">
-        Salesforce Developer, Engineer, Learn / Solve.
+        {`Salesforce Developer, Engineer, Learn / Solve.`}
       </p>
     </header>
 
     <section className="mb-16">
       <h2 className="text-2xl font-semibold mb-4">About</h2>
       <p className="text-gray-700 leading-relaxed max-w-2xl">
-        I'm a Salesforce Developer with a focus on CRM Analytics and experience in Lightning Web Components (LWC). I enjoy solving business problems with practical Salesforce solutions. Outside of work, I play CS:GO and Valorant.
+        {`I'm a Salesforce Developer with a focus on CRM Analytics and experience in Lightning Web Components (LWC). I enjoy solving business problems with practical Salesforce solutions. Outside of work, I play CS:GO and Valorant.`}
       </p>
     </section>
 
