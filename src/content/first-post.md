@@ -1,6 +1,6 @@
 ---
 title: "My First Blog - The Start"
-date: "2025-07-25"
+date: "2024-07-03"
 ---
 
 # My First Blog - The Start
