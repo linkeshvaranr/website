@@ -1,7 +1,7 @@
 ---
 title: "Dell S2425H - Mac M1 - Fast Forward Issue"
 date: "2025-08-25"
-—
+—--
 
 # Dell S2425H - Mac M1 - Fast Forward Issue
 
