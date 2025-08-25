@@ -11,9 +11,21 @@ export function getSlugs() {
 }
 
 export function getPost(slug: string) {
-  const file = fs.readFileSync(path.join(postsDir, slug + '.md'), 'utf8')
+  const filePath = path.join(postsDir, slug + '.md')
+  const file = fs.readFileSync(filePath, 'utf8')
   const { data, content } = matter(file)
-  return { data, content }
+
+  // get file system metadata
+  const stats = fs.statSync(filePath)
+  const createdDate = stats.birthtime.toISOString()
+
+  return { 
+    data: {
+      ...data,
+      date: data.date || createdDate // fallback to file created date
+    }, 
+    content 
+  }
 }
 
 export async function getPostHtml(slug: string) {
