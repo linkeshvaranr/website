@@ -19,7 +19,7 @@ export async function generateMetadata({
   const { data } = await getPostHtml(slug)
   return {
     title: data.title,
-    description: data.excerpt || "",
+    description: data.excerpt || "",  
   }
 }
 
