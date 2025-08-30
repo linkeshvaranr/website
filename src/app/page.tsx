@@ -4,14 +4,17 @@ import { getSlugs, getPost } from '@/lib/md'
 
 export default function Home() {
 const slugs = getSlugs()
-const posts = slugs.map(slug => {
-  const { data } = getPost(slug.replace(/\.md$/, ''))
-  return {
-    slug: slug.replace(/\.md$/, ''),
-    title: data.title,
-    date: data.date,
-  }
-})
+const posts = slugs
+  .map(slug => {
+    const { data } = getPost(slug.replace(/\.md$/, ''))
+    return {
+      slug: slug.replace(/\.md$/, ''),
+      title: data.title,
+      date: data.date,
+    }
+  })
+  .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
 
 return (
   <div className="flex flex-col min-h-screen bg-black text-gray-200">
@@ -54,7 +57,7 @@ return (
     {/* Footer with Contact Section */}
     
 
-<div className="fixed bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-t border-green-500 px-6 py-2">
+<div className="fixed bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-t border-white-500 px-6 py-2">
   <div className="flex items-center justify-center">
     <Contact />
   </div>
