@@ -1,34 +1,52 @@
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
-import { remark } from 'remark'
-import html from 'remark-html'
+import fs from "fs"
+import path from "path"
+import matter from "gray-matter"
+import { remark } from "remark"
+import html from "remark-html"
 
-const postsDir = path.join(process.cwd(), 'src/content')
-
-export function getSlugs() {
-  return fs.readdirSync(postsDir).filter(file => file.endsWith('.md'))
+// Define frontmatter type
+export type PostMeta = {
+  title: string
+  excerpt?: string
+  date: string
+  [key: string]: unknown // allows extra fields without breaking TS
 }
 
-export function getPost(slug: string) {
-  const filePath = path.join(postsDir, slug + '.md')
-  const file = fs.readFileSync(filePath, 'utf8')
+const postsDir = path.join(process.cwd(), "src/content")
+
+// Return all slugs (filenames without .md)
+export function getSlugs(): string[] {
+  return fs.readdirSync(postsDir).filter((file) => file.endsWith(".md"))
+}
+
+// Get raw post data + frontmatter
+export function getPost(slug: string): { data: PostMeta; content: string } {
+  const filePath = path.join(postsDir, slug + ".md")
+  const file = fs.readFileSync(filePath, "utf8")
   const { data, content } = matter(file)
 
-  // get file system metadata
   const stats = fs.statSync(filePath)
   const createdDate = stats.birthtime.toISOString()
 
-  return { 
+  if (!data.title) {
+    throw new Error(`Post ${slug} is missing required "title" in frontmatter`)
+  }
+
+  return {
     data: {
-      ...data,
-      date: data.date || createdDate // fallback to file created date
-    }, 
-    content 
+      ...(data as Omit<PostMeta, "date">),
+      title: data.title as string,
+      date: (data as PostMeta).date || createdDate,
+    },
+    content,
   }
 }
 
-export async function getPostHtml(slug: string) {
+
+// Convert markdown → HTML
+export async function getPostHtml(
+  slug: string
+): Promise<{ data: PostMeta; html: string }> {
   const { data, content } = getPost(slug)
   const htmlContent = await remark().use(html).process(content)
   return { data, html: htmlContent.toString() }
