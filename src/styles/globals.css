@@ -7,3 +7,28 @@
 body {
   @apply bg-black text-white font-sans;
 }
+
+/* Better Markdown spacing */
+.prose h1 {
+  @apply text-3xl font-bold mb-6 mt-8;
+}
+
+.prose h2 {
+  @apply text-2xl font-semibold mb-4 mt-6;
+}
+
+.prose p {
+  @apply my-4 leading-relaxed;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-green-400 pl-4 italic text-gray-400;
+}
+
+.prose pre {
+  @apply bg-gray-900 border border-green-500 rounded-lg p-4 overflow-x-auto;
+}
+
+.prose code {
+  @apply bg-gray-900 text-green-400 px-1 rounded;
+}

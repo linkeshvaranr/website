@@ -40,12 +40,25 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
       <p className="text-sm text-gray-500 mb-6">{post.data.date}</p>
 
-      <article>
+      {/* <article>
         <div
           className="prose prose-neutral dark:prose-invert max-w-none mt-8"
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
-      </article>
+      </article> */}
+      <article
+  className="prose prose-invert max-w-none
+             prose-headings:mb-4 prose-headings:mt-8
+             prose-p:my-4 prose-p:leading-relaxed
+             prose-h1:text-3xl prose-h1:font-bold prose-h1:mb-6
+             prose-h2:text-2xl prose-h2:font-semibold prose-h2:mb-4
+             prose-strong:text-white
+             prose-code:bg-gray-900 prose-code:text-green-400 prose-code:px-1 prose-code:rounded
+             prose-pre:bg-gray-900 prose-pre:border prose-pre:border-green-500 prose-pre:rounded-lg
+             prose-blockquote:border-l-green-400 prose-blockquote:pl-4 prose-blockquote:text-gray-400"
+  dangerouslySetInnerHTML={{ __html: post.html }}
+/>
+
     </div>
   )
 }
