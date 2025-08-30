@@ -8,7 +8,7 @@ date: "2025-08-25"
 
 I recently bought a **Dell S2425H (23.8"/60.45 cm FHD IPS 100 Hz)**. It’s a pretty good display, and the speaker quality is also nice.  
 
-I connected it via the **HDMI port**. After a few days, I noticed a strange issue:  
+I connected it via the **HDMI port**. After a few days, I noticed a strange issue-  
 
 When I opened a YouTube video in Chrome, it got stuck. After closer observation, I realized the video was playing at tremendous speed, skipping straight to the end.  
 
