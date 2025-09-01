@@ -34,9 +34,17 @@ return (
       <section className="mb-16">
         <h2 className="text-2xl font-semibold mb-4">About</h2>
         <p className="text-gray-300 leading-relaxed max-w-2xl">
-          I&apos;m a Salesforce Developer with a focus on CRM Analytics and experience in Lightning Web Components (LWC). I enjoy solving business problems with practical Salesforce solutions. Outside of work, I play CS:GO and Valorant.
+          I&apos;m a <a 
+            href="https://youtube.com/shorts/bnossYtLUWY?si=JzhrTSF9WU74XEQe" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-green-400 hover:underline"
+          >
+            Salesforce
+          </a> Developer with a focus on CRM Analytics and experience in Lightning Web Components (LWC). I enjoy solving business problems with practical Salesforce solutions. Outside of work, I play CS:GO and Valorant.
         </p>
       </section>
+
 
       {/* Scrollable Blog Section */}
       <section className="mb-16 max-h-[400px] overflow-y-auto pr-2">
