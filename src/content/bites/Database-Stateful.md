@@ -1,30 +1,32 @@
 ---
 title: "Database.Stateful Usecases"
 date: "2025-09-18"
+num: 1
 excerpt: "About Database.Stateful Usecases"
 ---
 
 ## Database.Stateful in Apex
 
-Normally, Batch Apex doesn’t keep variable values between `execute` runs — each chunk starts fresh.  
-If you need to **retain state across batches**, use the `Database.Stateful` interface.
+Normally, Batch Apex doesn’t keep variable values between `execute` runs, after each excute teh variable will be reset 
 
+If you need to retain the value across executes, use the `Database.Stateful` interface.
+ 
 ### Example
 
 ```apex
 global class MyBatchClass 
+    // implement the Stateful
     implements Database.Batchable<SObject>, Database.Stateful {
 
-    // Instance variable that keeps value across execute calls
+    // let's say we need to calculate the count of records processes
     global Integer totalProcessed = 0;
 
     global Database.QueryLocator start(Database.BatchableContext BC) {
-        // Fetch all accounts
         return Database.getQueryLocator([SELECT Id FROM Account]);
     }
 
     global void execute(Database.BatchableContext BC, List<Account> scope) {
-        // Add current batch size to total
+        // Add current count to total
         totalProcessed += scope.size();
     }
 

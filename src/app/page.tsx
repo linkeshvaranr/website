@@ -21,6 +21,7 @@ export default function Home() {
 
   type Bite = {
   slug: string
+  num: number,
   title: string
   created: string
   autoNum: string
@@ -35,12 +36,16 @@ let bites: Bite[] = biteSlugs.map(slug => {
     slug: slug.replace(/\.md$/, ''),
     title: data.title,
     created: data.created,
+    num : data.num,
     autoNum: "", // temp placeholder
   }
 })
 
+console.log('bites',bites);
+
+
 bites = bites
-  .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+  .sort((a, b) => a.num - b.num)
   .map((bite, index) => ({
     ...bite,
     autoNum: `SFBITE #${index + 1}`,

@@ -45,7 +45,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
         </Link>
       </header>
 
-      <p className="text-sm text-gray-500 mb-6">{post.data.date}</p>
+      {/* <p className="text-sm text-gray-500 mb-6">{post.data.date}</p> */}
 
       {/* <article>
         <div

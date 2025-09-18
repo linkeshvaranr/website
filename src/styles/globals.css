@@ -44,4 +44,51 @@ body {
   background-color: #22c55e;
   color: black;
 }
+/* Code blocks (``` ... ``` in markdown) */
+.prose pre {
+  background-color: #1e1e1e !important; 
+  /* VS Code dark gray */
+  border: 1px solid #2d2d2d !important;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
 
+/* Inline code (`like this`) */
+.prose code {
+  background-color: #1e1e1e !important;
+  color: #e2e8f0 !important; /* light gray text */
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 0.9em;
+  font-family: "Fira Code", "Source Code Pro", monospace;
+}
+
+/* Remove Tailwind Typography’s green override */
+.prose-code {
+  color: inherit !important;
+}
+
+/* Style tables inside prose */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid #2d2d2d;
+  padding: 0.5rem 0.75rem;
+}
+
+.prose th {
+  background-color: #1e1e1e;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.prose tr:nth-child(even) {
+  background-color: #111111;
+}
