@@ -1,10 +1,12 @@
-import { getSlugs, getPostHtml } from '@/lib/md'
+import { getBiteSlugs, getPostHtml } from '@/lib/bite-md'
 import { notFound } from 'next/navigation'
 import { type Metadata } from 'next'
 import Link from 'next/link'
 
 export async function generateStaticParams() {
-  return getSlugs().map(slug => ({
+    console.log(getBiteSlugs);
+  return getBiteSlugs().map(slug => ({
+    
     slug: slug.replace(/\.md$/, ''),
   }))
 }
@@ -22,7 +24,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = await getPostHtml(slug)
 
-  if (!post) return notFound()
+  if (!post){
+    console.log("not found");
+    
+    return notFound()
+
+  } 
 
   return (
     <div className="px-6 md:px-24 py-8">

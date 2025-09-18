@@ -21,3 +21,31 @@ export async function getPostHtml(slug: string) {
   const htmlContent = await remark().use(html).process(content)
   return { data, html: htmlContent.toString() }
 }
+
+// ✅ New: Get all bites sorted by created date
+export function getAllBites() {
+  const slugs = getBiteSlugs()
+
+  const bites = slugs.map(slug => {
+    const file = fs.readFileSync(path.join(postsDir, slug), 'utf8')
+    const { data, content } = matter(file)
+
+    return {
+      slug: slug.replace(/\.md$/, ''),
+      data,
+      content,
+    }
+  })
+
+  // Sort by created date (newest first)
+  const sorted = bites.sort(
+    (a, b) => new Date(b.data.created).getTime() - new Date(a.data.created).getTime()
+  )
+
+  // Add auto numbering (newest = #1)
+  return sorted.map((bite, index) => ({
+    ...bite,
+    autoNumber: `SFBITE #${index + 1}`,
+  }))
+}
+

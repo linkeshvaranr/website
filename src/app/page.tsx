@@ -19,14 +19,23 @@ export default function Home() {
 
   // Salesforce Bites
   const biteSlugs = getBiteSlugs()
-  const bites = biteSlugs
-    .map(slug => {
-      const { data } = getBite(slug.replace(/\.md$/, ''))
-      return {
-        slug: slug.replace(/\.md$/, ''),
-        title: data.title,
-      }
-    })
+  let bites = biteSlugs.map(slug => {
+    const { data } = getBite(slug.replace(/\.md$/, ''))
+
+    return {
+      slug: slug.replace(/\.md$/, ''),
+      title: data.title,
+      created: data.created,
+    }
+  })
+  bites = bites.sort(
+    (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()
+  )
+  bites = bites.map((bite, index) => ({
+    ...bite,
+    autoNum: `SFBITE #${index + 1}`,
+  }))
+
 
   return (
     <div className="flex flex-col min-h-screen bg-black text-gray-200">
@@ -58,18 +67,28 @@ export default function Home() {
         </section>
 
         {/* Salesforce Bites Section */}
-        <section className="mb-16 max-h-[300px] overflow-y-auto pr-2">
-          <h2 className="text-2xl font-semibold mb-4">Salesforce Bites</h2>
-          {bites.map(bite => (
-            <Link key={bite.slug} href={`/bites/${bite.slug}`}>
-              <div className="mb-4 cursor-pointer">
-                <h3 className="text-lg font-medium text-gray-100 hover:text-green-400 transition">
-                  {bite.title}
-                </h3>
-              </div>
-            </Link>
-          ))}
-        </section>
+        <section className="mb-16">
+  <h2 className="text-2xl font-semibold mb-6">Salesforce Bites</h2>
+
+  {/* Grid wrapper */}
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    {bites.map(bite => (
+      <Link key={bite.slug} href={`/bite/${bite.slug}`}>
+  <div className="p-6 bg-gray-900 border border-gray-700 rounded-xl 
+                  hover:border-green-400 
+                  hover:shadow-[0_0_20px_rgba(34,197,94,0.5)] 
+                  transition-transform hover:-translate-y-1 hover:scale-105 
+                  duration-300 cursor-pointer">
+    <h3 className="text-lg font-semibold text-gray-100">{bite.title}</h3>
+    <p className="text-sm text-green-400 mt-1">{bite.autoNum}</p>
+  </div>
+</Link>
+
+    ))}
+  </div>
+</section>
+
+
 
         {/* Scrollable Blog Section */}
         <section className="mb-16 max-h-[400px] overflow-y-auto pr-2">
@@ -78,6 +97,7 @@ export default function Home() {
             <Link key={post.slug} href={`/blog/${post.slug}`}>
               <div className="mb-6 cursor-pointer">
                 <h2 className="text-xl font-semibold text-gray-100 hover:text-green-400 transition">
+                  
                   {post.title}
                 </h2>
                 <p className="text-sm text-gray-500">{post.date}</p>
