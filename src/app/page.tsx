@@ -6,6 +6,7 @@ import { getBiteSlugs, getBite } from '@/lib/bite-md'
 export default function Home() {
   // Blog posts
   const slugs = getSlugs()
+  
   const posts = slugs
     .map(slug => {
       const { data } = getPost(slug.replace(/\.md$/, ''))
@@ -17,24 +18,34 @@ export default function Home() {
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-  // Salesforce Bites
-  const biteSlugs = getBiteSlugs()
-  let bites = biteSlugs.map(slug => {
-    const { data } = getBite(slug.replace(/\.md$/, ''))
 
-    return {
-      slug: slug.replace(/\.md$/, ''),
-      title: data.title,
-      created: data.created,
-    }
-  })
-  bites = bites.sort(
-    (a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()
-  )
-  bites = bites.map((bite, index) => ({
+  type Bite = {
+  slug: string
+  title: string
+  created: string
+  autoNum: string
+}
+
+  // Salesforce Bites
+const biteSlugs = getBiteSlugs()
+let bites: Bite[] = biteSlugs.map(slug => {
+  const { data } = getBite(slug.replace(/\.md$/, ''))
+
+  return {
+    slug: slug.replace(/\.md$/, ''),
+    title: data.title,
+    created: data.created,
+    autoNum: "", // temp placeholder
+  }
+})
+
+bites = bites
+  .sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+  .map((bite, index) => ({
     ...bite,
     autoNum: `SFBITE #${index + 1}`,
   }))
+
 
 
   return (
