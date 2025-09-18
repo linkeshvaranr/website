@@ -71,7 +71,7 @@ bites = bites
       <main className="flex-grow px-6 md:px-24 py-12">
         {/* About Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-mono font-semibold mb-6 text-gray-100">About</h2>
+          <h2 className="text-2xl font-semibold mb-4">About</h2>
           <p className="text-gray-300 leading-relaxed max-w-2xl">
             I&apos;m a{" "}
             <Link
@@ -86,7 +86,7 @@ bites = bites
 
         {/* Salesforce Bites Section */}
         <section className="mb-16">
-  <h2 className="text-2xl font-mono font-semibold mb-6 text-gray-100">Salesforce Bites</h2>
+  <h2 className="text-2xl font-semibold mb-4">Salesforce Bites</h2>
 
   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
     {bites.map(bite => (
@@ -108,7 +108,7 @@ bites = bites
 
         {/* Scrollable Blog Section */}
         <section className="mb-16 max-h-[400px] overflow-y-auto pr-2">
-          <h2 className="text-2xl font-mono font-semibold mb-6 text-gray-100">Blogs</h2>
+          <h2 className="text-2xl font-semibold mb-4">Blogs</h2>
           {posts.map(post => (
             <Link key={post.slug} href={`/blog/${post.slug}`}>
               <div className="mb-6 cursor-pointer">
