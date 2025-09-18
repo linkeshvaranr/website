@@ -45,11 +45,13 @@ console.log('bites',bites);
 
 
 bites = bites
-  .sort((a, b) => a.num - b.num)
+  // Sort descending (largest number first)
+  .sort((a, b) => b.num - a.num)
   .map((bite, index) => ({
     ...bite,
-    autoNum: `SFBITE #${index + 1}`,
+    autoNum: `SFBITE #${bite.num}`,
   }))
+
 
 
 
@@ -69,7 +71,7 @@ bites = bites
       <main className="flex-grow px-6 md:px-24 py-12">
         {/* About Section */}
         <section className="mb-16">
-          <h2 className="text-2xl font-semibold mb-4">About</h2>
+          <h2 className="text-2xl font-mono font-semibold mb-6 text-gray-100">About</h2>
           <p className="text-gray-300 leading-relaxed max-w-2xl">
             I&apos;m a{" "}
             <Link
@@ -84,31 +86,29 @@ bites = bites
 
         {/* Salesforce Bites Section */}
         <section className="mb-16">
-  <h2 className="text-2xl font-semibold mb-6">Salesforce Bites</h2>
+  <h2 className="text-2xl font-mono font-semibold mb-6 text-gray-100">Salesforce Bites</h2>
 
-  {/* Grid wrapper */}
-  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
     {bites.map(bite => (
       <Link key={bite.slug} href={`/bite/${bite.slug}`}>
-  <div className="p-6 bg-gray-900 border border-gray-700 rounded-xl 
-                  hover:border-green-400 
-                  hover:shadow-[0_0_20px_rgba(34,197,94,0.5)] 
-                  transition-transform hover:-translate-y-1 hover:scale-105 
-                  duration-300 cursor-pointer">
-    <h3 className="text-lg font-semibold text-gray-100">{bite.title}</h3>
-    <p className="text-sm text-green-400 mt-1">{bite.autoNum}</p>
-  </div>
-</Link>
-
+        <div className="p-4 bg-gray-900 border border-gray-700 rounded-lg 
+                        hover:border-green-400 hover:shadow-[0_0_10px_rgba(34,197,94,0.5)]
+                        transition-transform transform hover:-translate-y-0.5 hover:scale-102
+                        duration-200 cursor-pointer">
+          <h3 className="text-base font-mono font-semibold text-gray-100">{bite.title}</h3>
+          <p className="text-xs font-mono text-green-400 mt-1">{bite.autoNum}</p>
+        </div>
+      </Link>
     ))}
   </div>
 </section>
 
 
 
+
         {/* Scrollable Blog Section */}
         <section className="mb-16 max-h-[400px] overflow-y-auto pr-2">
-          <h2 className="text-2xl font-semibold mb-4">Blogs</h2>
+          <h2 className="text-2xl font-mono font-semibold mb-6 text-gray-100">Blogs</h2>
           {posts.map(post => (
             <Link key={post.slug} href={`/blog/${post.slug}`}>
               <div className="mb-6 cursor-pointer">

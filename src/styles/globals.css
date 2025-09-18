@@ -92,3 +92,7 @@ body {
 .prose tr:nth-child(even) {
   background-color: #111111;
 }
+
+.bg-gray-900{
+  background-color: #43434358;
+}
