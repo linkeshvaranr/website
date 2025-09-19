@@ -10,6 +10,13 @@ excerpt: "About SOQL AggregateResult in Apex"
 When using aggregate functions like `COUNT()`, `SUM()`, `AVG()`, etc. with `GROUP BY`,  
 the query does not return a list of sObjects like Account but instead a list of AggregateResult objects.
 
+```apex
+List<Account> = accList = [SELECT AccountSource, COUNT(Id) SourceCount 
+                           FROM Account 
+                           GROUP BY AccountSource];
+
+```
+
 If you try to assign the result directly to a `List<Account>`, you will get an error:  
 `Illegal assignment from List<AggregateResult> to List<Account>`
 
